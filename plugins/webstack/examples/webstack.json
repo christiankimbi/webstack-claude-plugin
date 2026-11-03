@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "php": { "env": "PHP_BIN", "candidates": ["C:/wamp64/bin/php/php8.3.28/php.exe"] },
+  "release": {
+    "lint": [["npm", "run", "lint"]],
+    "build": ["npx", "vite", "build", "--emptyOutDir"],
+    "dist": "dist",
+    "zip": "release/example-site-{date}.zip",
+    "phpLint": ["public/api/*.php"],
+    "exclude": ["server.cjs*"],
+    "required": [".htaccess", "index.html", "robots.txt", "sitemap.xml", "api/config.php"]
+  },
+  "apache": {
+    "target": "C:/wamp64/www/example-test",
+    "baseUrl": "http://localhost:8181/example-test",
+    "neverTouch": ["C:/wamp64/www/example"]
+  },
+  "urlChecks": {
+    "forbiddenPaths": ["/api/contact"],
+    "checks": [
+      { "name": "home page 200", "path": "/" },
+      { "name": "deep link served by the SPA", "path": "/about/", "body": { "contains": ["<div id=\"root\""] } },
+      { "name": "data folder blocked", "path": "/data/", "status": 403 },
+      { "name": "robots blocks data", "path": "/robots.txt", "body": { "contains": ["Disallow: /data/"] } }
+    ]
+  },
+  "emails": {
+    "apiDir": "public/api",
+    "handlers": { "contact": "contact.php" },
+    "copy": ["email_helpers.php"],
+    "stubConstants": { "RECEIVER_SALES_EMAIL": "sales@example.com" },
+    "cases": ".claude/webstack/email-cases",
+    "assertions": [
+      { "name": "inquiry goes to sales", "case": "contact-*", "message": 1, "field": "to", "contains": ["sales@example.com"] },
+      { "name": "no banned wording", "field": "any", "ignoreCase": true, "notContains": ["24/7"] }
+    ]
+  },
+  "security": {
+    "mustBeIgnored": [".env", "secrets/site-secrets.php"],
+    "secretPatterns": ["SMTP_PASS['\"]?\\s*(=>|=|:)\\s*['\"][^'\"$.<]"],
+    "protectedUrls": ["/data/"]
+  }
+}

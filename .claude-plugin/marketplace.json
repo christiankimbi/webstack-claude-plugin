@@ -1,0 +1,17 @@
+{
+  "name": "webstack",
+  "owner": { "name": "Christian Kimbi" },
+  "metadata": {
+    "description": "Tooling for React/Vite + PHP websites hosted on Apache/cPanel (WordPress rebuilds).",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "webstack",
+      "description": "Release zip, local Apache test, email, PHP/TypeScript parity and security checks for React/Vite + PHP sites on Apache/cPanel.",
+      "version": "0.1.0",
+      "author": { "name": "Christian Kimbi" },
+      "source": "./plugins/webstack"
+    }
+  ]
+}

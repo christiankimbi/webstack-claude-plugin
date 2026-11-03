@@ -1,0 +1,6 @@
+{
+  "name": "webstack",
+  "version": "0.1.0",
+  "description": "Release zip, local Apache test, email, PHP/TypeScript parity and security checks for React/Vite + PHP sites on Apache/cPanel. Each project opts in with .claude/webstack.json.",
+  "author": { "name": "Christian Kimbi" }
+}
