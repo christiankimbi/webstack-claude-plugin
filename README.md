@@ -39,15 +39,15 @@ For checks the settings file cannot express, use `hooks.<phase>`. Each hook is a
 ## Install (Claude Code)
 
 ```
-claude plugin marketplace add E:/Work/claude-plugins/webstack
-claude plugin install webstack@webstack
+claude plugin marketplace add christiankimbi/webstack-claude-plugin
+claude plugin install webstack@webstack --scope project
 ```
 
-Then enable it in each project that has `.claude/webstack.json` (`enabledPlugins` in that project's `.claude/settings.json`), or install it at user scope.
+Run the install from inside each project that has `.claude/webstack.json`. Project scope keeps the skills out of your other projects.
 
 ## Codex
 
-Codex cannot load Claude plugins. In each project, `.agents/skills/<skill>/SKILL.md` wrappers point to this repository's source folder, `E:/Work/claude-plugins/webstack/plugins/webstack/skills/<skill>/SKILL.md`, which does not move between versions. They never point to Claude's versioned plugin cache. In those skills, `<plugin>` is `E:/Work/claude-plugins/webstack/plugins/webstack`.
+Codex cannot load Claude plugins. In each project, `.agents/skills/<skill>/SKILL.md` wrappers point to a local clone of this repository, `<clone>/plugins/webstack/skills/<skill>/SKILL.md`, which does not move between versions. They never point to Claude's versioned plugin cache. In those skills, `<plugin>` is `<clone>/plugins/webstack`.
 
 ## Versioning
 
